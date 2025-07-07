@@ -7,7 +7,9 @@ import model.move.*;
 import model.transpositionTable.ReportTranspositionTable;
 import model.transpositionTable.TranspositionTable;
 import model.transpositionTable.TranspositionTableManager;
+import view.LoadingDialog;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +39,7 @@ public class Caesar extends Player{
     private final MoveComparatorEvolutionTheory maxComparator;
     private final MoveComparatorEvolutionTheory minComparator;
     private final TranspositionTable transpositionTable;
-    private final TranspositionTable memoryTable;
+    private TranspositionTable memoryTable;
     private final TimeManager timeManager;
     private final List<TranspositionTable.TranspositionEntry> newEntries = new ArrayList<>();
     private String result;
@@ -46,16 +48,22 @@ public class Caesar extends Player{
     boolean timeOut = false;
     double startTime;
     double totalTime;
+    String colorString;
+    LoadingDialog loadingDialog;
 
     public Caesar(boolean isBlue, Board board, EvaluationFunction evaluationFunction, double totalTime) {
         super(isBlue, board,new MoveGeneratorEvolutionTheory(board, MoveGeneratingStyle.ALL_TYPE_MOVES_PIECE_BY_PIECE, new MoveType[]{MoveType.FRIEND_ON_NEAR, MoveType.SACRIFICE, MoveType.FRIEND_ON_FAR, MoveType.FRIEND_ON_BOTH, MoveType.QUIET},new int[]{2, 4, 7, 1, 8, 6, 5, 3},true),evaluationFunction);
+        this.colorString = isBlue ? "Blue" : "Red";
         this.totalTime = totalTime;
         this.maxComparator = new MoveComparatorEvolutionTheory(isEvaluationBlue(),board, maxHistoryTable, killerMoves, killerSort, moveComparatorMoveTypes, comp, moveComparatorFrontToBack);
         this.minComparator = new MoveComparatorEvolutionTheory(!isEvaluationBlue(),board, minHistoryTable, killerMoves, killerSort, moveComparatorMoveTypes, comp, moveComparatorFrontToBack);
         this.timeManager = new TimeManager(totalTime,peakMove, midGameMoves, earlyFactor, midFactor, endFactor);
         this.transpositionTable= new ReportTranspositionTable();
         System.out.println("First Table created..");
+        loadingDialog = new LoadingDialog(new JFrame(),"Loading Caesar's Tables for the " + colorString + " Player...");
+        SwingUtilities.invokeLater(() -> loadingDialog.setVisible(true));
         memoryTable = TranspositionTableManager.loadTranspositionTable(true);
+        SwingUtilities.invokeLater(() -> loadingDialog.dispose());
         System.out.println("Second Table loaded..");
         this.remainingTime = totalTime / 1000;
     }
@@ -355,7 +363,10 @@ public class Caesar extends Player{
         }
         updateResult();
         memoryTable.resetCounters();
+        loadingDialog = new LoadingDialog(new JFrame(),"Saving Caesar's Tables from the " + colorString + " Player...");
+        SwingUtilities.invokeLater(() -> loadingDialog.setVisible(true));
         TranspositionTableManager.saveTranspositionTable(memoryTable);
+        SwingUtilities.invokeLater(() -> loadingDialog.dispose());
         System.out.println("saved");
     }
 

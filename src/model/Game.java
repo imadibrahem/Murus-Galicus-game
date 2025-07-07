@@ -257,9 +257,9 @@ public class Game {
             }
             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            displayFrame.dispose();
             blue.updateTables();
             red.updateTables();
-            displayFrame.dispose();
             new GameOverWindow(winnerColor, (blue.getRounds() + red.getRounds()));
             printGameResults();
         }

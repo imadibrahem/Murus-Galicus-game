@@ -68,7 +68,7 @@ public class StartGameWindow extends JFrame {
             //StartGameWindow.this.setVisible(false);
             //new Thread(() -> new GameMaker(blueType, redType, totalSeconds)).start();
             Thread t = new Thread(() -> new GameMaker(blueType, redType, totalSeconds));
-            t.setDaemon(true);
+            //t.setDaemon(true);
             t.start();
 
         }

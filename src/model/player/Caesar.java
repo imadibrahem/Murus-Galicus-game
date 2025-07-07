@@ -356,6 +356,7 @@ public class Caesar extends Player{
         updateResult();
         memoryTable.resetCounters();
         TranspositionTableManager.saveTranspositionTable(memoryTable);
+        System.out.println("saved");
     }
 
 }

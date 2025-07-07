@@ -165,9 +165,7 @@ public abstract class Player {
         return "No table found for this player..";
     }
 
-    public void updateTables(){
-
-    }
+    public abstract void updateTables();
 
     public Move recieveCords(int initial , int targetNear, int targetFar){
         int location = this.isEvaluationBlue() ? initial : 55 - initial;

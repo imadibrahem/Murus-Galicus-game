@@ -13,12 +13,7 @@ public class User extends Player{
         super(isBlue, board,evaluationFunction);
         this.userInput = userInput;
         this.remainingTime = totalTime / 1000;
-    }
-
-    public User(boolean isBlue, Board board, MoveGenerator moveGenerator, EvaluationFunction evaluationFunction, UserInput userInput, double totalTime) {
-        super(isBlue, board, moveGenerator, evaluationFunction);
-        this.userInput = userInput;
-        this.remainingTime = totalTime / 1000;
+        this.name = "User";
     }
 
     @Override

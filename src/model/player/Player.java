@@ -27,6 +27,7 @@ public abstract class Player {
     protected MoveGenerator moveGenerator;
     protected final ZobristHashing zobristHashing;
     protected static final int MAX_DEPTH = 15;
+    protected String name;
 
     public Player(boolean isBlue,Board board, EvaluationFunction evaluationFunction) {
         this.isBlue = isBlue;
@@ -107,6 +108,10 @@ public abstract class Player {
 
     public ZobristHashing getZobristHashing() {
         return zobristHashing;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void switchColor() {

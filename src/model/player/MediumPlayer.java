@@ -51,6 +51,7 @@ public class MediumPlayer extends Player{
         this.transpositionTable= new ReportTranspositionTable();
         System.out.println("Table created..");
         this.remainingTime = totalTime / 1000;
+        this.name = "Medium";
     }
 
 

@@ -12,9 +12,9 @@ import java.awt.event.ActionListener;
 @SuppressWarnings("serial")
 public class StartGameWindow extends JFrame {
 
-    private JComboBox<String> bluePlayerBox;
-    private JComboBox<String> redPlayerBox;
-    private JComboBox<String> timeBox;
+    private final JComboBox<String> bluePlayerBox;
+    private final JComboBox<String> redPlayerBox;
+    private final JComboBox<String> timeBox;
 
     public StartGameWindow() {
         setTitle("Start Game");

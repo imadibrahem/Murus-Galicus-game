@@ -66,6 +66,7 @@ public class Caesar extends Player{
         SwingUtilities.invokeLater(() -> loadingDialog.dispose());
         System.out.println("Second Table loaded..");
         this.remainingTime = totalTime / 1000;
+        this.name = "Caesar";
     }
 
     @Override

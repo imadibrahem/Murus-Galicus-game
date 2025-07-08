@@ -15,6 +15,7 @@ public class DisplayFrame extends JFrame{
 
     Player blue;
     Player red;
+    Game game;
     double blueRemaining;
     double redRemaining;
 
@@ -29,14 +30,19 @@ public class DisplayFrame extends JFrame{
     JLabel redRoundsLabel;
     JPanel turnColorPanel;
 
+    JLabel bluePlayerType;
+    JLabel versusLabel;
+    JLabel redPlayerType;
+
     public DisplayFrame(String FEN, Game game) {
+        this.game = game;
         this.blue = game.getBlue();
         this.red = game.getRed();
         isBlueTurn = game.getPlayerOn().equals(blue);
 
         getContentPane().setBackground(Color.darkGray);
         setLayout(new GridBagLayout());
-        setMinimumSize(new Dimension(677 ,716));
+        setMinimumSize(new Dimension(677 ,756));
         setTitle("Murus Gallicus");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         displayBoard = new DisplayBoard(FEN);
@@ -53,27 +59,35 @@ public class DisplayFrame extends JFrame{
         timePanel.add(blueTimeLabel, BorderLayout.WEST);
         timePanel.add(centerPanel, BorderLayout.CENTER);
         timePanel.add(redTimeLabel, BorderLayout.EAST);
-
-
-        /*JPanel timePanel = new JPanel(new GridLayout(1, 2));
-        timePanel.add(blueTimeLabel);
-        timePanel.add(redTimeLabel);
-         */
-
         timePanel.setPreferredSize(new Dimension(677, 40));
 
-        GridBagConstraints gbc = new GridBagConstraints();
+        bluePlayerType = new JLabel(blue.getName());
+        bluePlayerType.setFont(new Font("Arial", Font.BOLD, 16));
+        bluePlayerType.setForeground(Color.BLUE);
+        redPlayerType = new JLabel(red.getName());
+        redPlayerType.setForeground(Color.RED);
+        redPlayerType.setFont(new Font("Arial", Font.BOLD, 16));
+        versusLabel = new JLabel("VS.");
+        JPanel playersPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 68, 5)){
+            @Override
+            public Dimension getPreferredSize() {
+                return new Dimension(677, 40);
+            }
 
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.weightx = 1.0;
-        gbc.weighty = 0.0;
-        add(timePanel, gbc);
+            @Override
+            public Dimension getMinimumSize() {
+                return getPreferredSize();
+            }
 
-        gbc.gridy = 1;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        add(displayBoard, gbc);
+            @Override
+            public Dimension getMaximumSize() {
+                return getPreferredSize();
+            }
+        };
+        playersPanel.add(bluePlayerType, BorderLayout.WEST);
+        playersPanel.add(versusLabel, BorderLayout.CENTER);
+        playersPanel.add(redPlayerType, BorderLayout.EAST);
+        playersPanel.setPreferredSize(new Dimension(677, 40));
 
         turnColorPanel = new JPanel();
         JLabel turnLabel = new JLabel("Turn: ");
@@ -93,7 +107,7 @@ public class DisplayFrame extends JFrame{
         JPanel statusPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 68, 5)){
             @Override
             public Dimension getPreferredSize() {
-                return new Dimension(677, 40); // fixed width & height
+                return new Dimension(677, 40);
             }
 
             @Override
@@ -106,18 +120,32 @@ public class DisplayFrame extends JFrame{
                 return getPreferredSize();
             }
         };
-        //statusPanel.setOpaque(false);
         statusPanel.add(turnPanel);
         statusPanel.add(blueRoundsLabel);
         statusPanel.add(totalRoundsLabel);
         statusPanel.add(redRoundsLabel);
 
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.0;
+        add(timePanel, gbc);
+
         gbc.gridy = 1;
+        gbc.weightx = 1.0;
         gbc.weighty = 0.0;
         add(displayBoard, gbc);
 
-        gbc.fill = GridBagConstraints.NONE;
         gbc.gridy = 2;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.0;
+        add(playersPanel, gbc);
+
+
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.gridy = 3;
         gbc.weighty = 0.0;
         add(statusPanel, gbc);
 

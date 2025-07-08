@@ -235,11 +235,13 @@ public class Game {
 
     public void checkForWinner(){
         if (playerOn.isEvaluationBlue()){
-            if (playerOn.getDuration() > playTime || blueBoard.lostGame(true)) winner = red;
+            if (red.getDuration() > playTime) winner = blue;
+            else if (blueBoard.lostGame(true)) winner = red;
             else if (redBoard.lostGame(false)) winner = blue;
         }
         else {
-            if (playerOn.getDuration() > playTime || redBoard.lostGame(false)) winner = blue;
+            if (blue.getDuration() > playTime) winner = red;
+            else if (redBoard.lostGame(false)) winner = blue;
             else if (blueBoard.lostGame(true)) winner = red;
         }
         if (winner != null){

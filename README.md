@@ -38,6 +38,6 @@ This Java application allows for:
 ---
 ## 🔒 Note
 
-This repository contains **readable source code**. If you're looking for the **Windows installer** version that runs without Java and hides the implementation, [check out the installer repository](https://github.com/imadibrahem/Murus-Gallicus-Windows-installer).
+This repository contains **readable source code**. If you're looking for the **Windows installer** version that runs without Java and hides the implementation, [check out the installer repository](https://github.com/imadibrahem/Murus-Galicus-Windows-installer).
 
 ---

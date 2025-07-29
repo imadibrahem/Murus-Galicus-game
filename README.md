@@ -34,5 +34,10 @@ This Java application allows for:
 
 - [The Owl’s Nest: Murus Gallicus](https://sites.google.com/site/theowlsnest02/home/murus-gallicus)
 - [Wikipedia - Murus Gallicus](https://en.wikipedia.org/w/index.php?title=Murus_Gallicus_(game)&oldid=1177520802)
+  
+---
+## 🔒 Note
+
+This repository contains **readable source code**. If you're looking for the **Windows installer** version that runs without Java and hides the implementation, [check out the installer repository](https://github.com/imadibrahem/Murus-Gallicus-Windows-installer).
 
 ---
